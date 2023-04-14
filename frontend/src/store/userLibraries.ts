@@ -239,6 +239,8 @@ class UserLibrariesStore {
             ItemFields.PrimaryImageAspectRatio,
             ItemFields.MediaSources,
             ItemFields.ProviderIds
+            ItemFields.CanDelete,
+            ItemFields.Taglines
           ],
           imageTypeLimit: 1,
           enableImageTypes: [

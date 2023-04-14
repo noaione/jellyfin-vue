@@ -117,13 +117,7 @@
                     <VCol
                       cols="12"
                       md="7">
-                      <!-- eslint-disable vue/no-v-html -
-                        Output is properly sanitized using sanitizeHtml -->
-                      <span
-                        v-if="item.Overview"
-                        class="item-overview"
-                        v-html="sanitizeHtml(item.Overview, true)" />
-                      <!-- eslint-enable vue/no-v-html -->
+                      <OverviewText :content="item.Overview || 'No description'" />
                     </VCol>
                   </VCol>
                 </VRow>
@@ -157,7 +151,6 @@ import { getUserLibraryApi } from '@jellyfin/sdk/lib/utils/api/user-library-api'
 import { getItemsApi } from '@jellyfin/sdk/lib/utils/api/items-api';
 import { getBlurhash } from '@/utils/images';
 import { msToTicks } from '@/utils/time';
-import { sanitizeHtml } from '@/utils/html';
 import { useRemote } from '@/composables';
 
 const SINGLE_MAX_LENGTH_MS = 600_000;

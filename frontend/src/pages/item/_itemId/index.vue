@@ -245,16 +245,10 @@
           <div>
             <p
               v-if="item.Taglines && item.Taglines.length > 0"
-              class="text-subtitle-1 text-truncate">
+              class="text-subtitle-1 my-2 text-truncate">
               {{ item.Taglines[0] }}
             </p>
-            <!-- eslint-disable vue/no-v-html -
-              Output is properly sanitized using sanitizeHtml -->
-            <p
-              v-if="item.Overview"
-              class="item-overview"
-              v-html="sanitizeHtml(item.Overview, true)" />
-            <!-- eslint-enable vue/no-v-html -->
+            <OverviewText :content="item.Overview || 'No description'" />
           </div>
         </VCol>
       </VRow>
@@ -298,7 +292,6 @@ import { getUserLibraryApi } from '@jellyfin/sdk/lib/utils/api/user-library-api'
 import { getBlurhash } from '@/utils/images';
 import { getItemDetailsLink, getMediaStreams } from '@/utils/items';
 import { getItemizedSelect } from '@/utils/forms';
-import { sanitizeHtml } from '@/utils/html';
 import { useRemote } from '@/composables';
 
 const route = useRoute();
