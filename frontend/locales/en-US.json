@@ -36,6 +36,8 @@
   "byArtist": "By {artist}",
   "cancel": "Cancel",
   "castAndCrew": "Cast & crew",
+  "chapter": "Chapter",
+  "chapters": "Chapters",
   "clipboardFail": "Failed to copy to clipboard",
   "clipboardSuccess": "Copied to clipboard",
   "clipboardUnsupported": "Copying to clipboard is unsupported in this browser",

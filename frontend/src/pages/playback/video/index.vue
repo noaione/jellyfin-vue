@@ -79,6 +79,7 @@
                 <VolumeSlider
                   v-if="$vuetify.display.smAndUp"
                   class="mr-2" />
+                <ChapterSelectionButton v-if="$vuetify.display.smAndUp" :close-on-click="true" />
                 <QueueButton :close-on-click="true" />
                 <SubtitleSelectionButton
                   v-if="$vuetify.display.smAndUp"
