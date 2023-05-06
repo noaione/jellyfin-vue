@@ -1,4 +1,4 @@
-import { defineConfig, UserConfig } from 'vite';
+import { defineConfig, UserConfig, splitVendorChunk } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import Pages from 'vite-plugin-pages';
 import Layouts from 'vite-plugin-vue-layouts';
@@ -19,6 +19,97 @@ import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
 import virtualModules from './scripts/virtual-modules';
 import { localeFilesFolder, srcRoot } from './scripts/paths';
+import autoprefixer from 'autoprefixer';
+import type { ManualChunkMeta } from 'rollup';
+
+/**
+ * A function to split vendor chunks based on the id of the module
+ */
+function splitMoreVendorChunk(
+  id: string,
+  getModuleInfo: ManualChunkMeta,
+  extraSplitName?: (id: string) => string | undefined
+): string | undefined {
+  const isVendorChunk = splitVendorChunk();
+
+  if (isVendorChunk(id, getModuleInfo)) {
+    if (typeof extraSplitName === 'function') {
+      const extraName = extraSplitName(id);
+
+      if (extraName) {
+        return `vendor.${extraName}`;
+      }
+    }
+
+    return 'vendor';
+  }
+}
+
+/**
+ * A function to manually split chunks based on the id of the module
+ */
+// eslint-disable-next-line sonarjs/cognitive-complexity
+function manualChunks(
+  id: string,
+  getModuleInfo: ManualChunkMeta
+): string | undefined {
+  if (
+    id.includes('virtual:locales') ||
+    id.includes('@intlify/unplugin-vue-i18n/messages')
+  ) {
+    return 'localization';
+  }
+
+  return splitMoreVendorChunk(id, getModuleInfo, (intId) => {
+    const isMarkdown = [
+      'remark',
+      'rehype',
+      'unified',
+      'mdast',
+      'hast',
+      'unist',
+      'micromark',
+      'markdown',
+      'vfile',
+      'zwitch'
+    ].some((name) => {
+      return intId.includes(name);
+    });
+    const isVueRelated = ['@vue', 'vue-i18n', '@intlify', 'vue-router'].some(
+      (name) => {
+        return intId.includes(name);
+      }
+    );
+
+    if (isMarkdown) {
+      return 'markdown';
+    }
+
+    if (intId.includes('vuetify')) {
+      return 'vuetify';
+    }
+
+    if (isVueRelated) {
+      return 'vue';
+    }
+
+    if (intId.includes('hls.js')) {
+      return 'player';
+    }
+
+    if (intId.includes('jellyfin/sdk/lib')) {
+      return 'jellyfin';
+    }
+
+    if (intId.includes('lodash')) {
+      return 'lodash';
+    }
+
+    if (intId.includes('date-fns')) {
+      return 'date-fns';
+    }
+  });
+}
 
 export default defineConfig(({ mode }): UserConfig => {
   const config: UserConfig = {
@@ -129,14 +220,7 @@ export default defineConfig(({ mode }): UserConfig => {
               })
               : undefined
           ],
-          manualChunks(id) {
-            if (
-              id.includes('virtual:locales') ||
-              id.includes('@intlify/unplugin-vue-i18n/messages')
-            ) {
-              return 'localization';
-            }
-          }
+          manualChunks
         }
       }
     },
