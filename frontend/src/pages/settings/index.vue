@@ -267,7 +267,7 @@ const adminSections = computed(() => {
         icon: IMdiCalendarClock,
         name: t('settingsSections.scheduledTasks.name'),
         description: t('settingsSections.scheduledTasks.description'),
-        link: undefined
+        link: 'settings/scheduled-tasks'
       },
       {
         icon: IMdiBell,

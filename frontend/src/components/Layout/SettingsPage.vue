@@ -12,12 +12,15 @@
         </VRow>
       </VCol>
     </VRow>
-    <VRow>
+    <VRow v-if="!columnsContent">
       <slot name="content" />
     </VRow>
+    <VCol v-else>
+      <slot name="content" />
+    </VCol>
   </VContainer>
 </template>
 
 <script setup lang="ts">
-defineProps<{ pageTitle?: string }>();
+defineProps<{ pageTitle?: string, columnsContent?: boolean }>();
 </script>

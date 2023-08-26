@@ -432,6 +432,11 @@
       "noActivityFound": "No activities found",
       "noLogsFound": "No logs found"
     },
+    "scheduledTasks": {
+      "duration": "Taking",
+      "lastRan": "Last ran {0} ago",
+      "stopping": "Stopping"
+    },
     "settings": "Settings"
   },
   "settingsSections": {
