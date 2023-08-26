@@ -311,6 +311,23 @@ export function canRefreshMetadata(item: BaseItemDto): boolean {
 }
 
 /**
+ * Check if an item can have a custom playlist generated for it.
+ */
+export function canGeneratePlaylistPlugin(item: BaseItemDto): boolean {
+  const allowedCopyPlaylistTypes = [
+    'BoxSet',
+    'CollectionFolder',
+    'MusicAlbum',
+    'MusicArtist',
+    'Playlist',
+    'Series',
+    'Season'
+  ];
+
+  return allowedCopyPlaylistTypes.includes(item.Type ?? '');
+}
+
+/**
  * Generate a link to the item's details page route
  *
  * @param item - The item used to generate the route
@@ -559,6 +576,31 @@ export async function getItemSeriesDownloadMap(
   }
 
   return result;
+}
+
+/**
+ * Get a URL for the playlist generator plugin for a given item.
+ *
+ * You can get the plugin here: https://github.com/noaione/jellyfin-plugin-playlistgen/
+ *
+ * @param item - The item to generate the playlist for
+ * @returns - A URL to the playlist generator plugin
+ */
+export function getPluginItemPlaylistGeneratorURL(item: BaseItemDto): string | undefined {
+  const remote = useRemote();
+
+  const serverAddress = remote.sdk.api?.basePath;
+  const userToken = remote.sdk.api?.accessToken;
+
+  const itemId = item.Id ?? '';
+
+  if (!itemId) {
+    return undefined;
+  }
+
+  if (serverAddress) {
+    return `${serverAddress}/PlaylistGen/Items/${itemId}?token=${userToken}`;
+  }
 }
 
 /**
