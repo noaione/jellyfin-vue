@@ -350,6 +350,7 @@
       "value": "{width}✕{height}"
     }
   },
+  "pluginCopyAsPlaylistURL": "Copy as Playlist URL",
   "present": "Present",
   "producer": "Producer",
   "quality": "Quality",
