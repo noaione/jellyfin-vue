@@ -1,3 +1,8 @@
+<h2 align="center">nao's Fork</h2>
+<p align="center">A published forked version that includes some improvement<br/>See <strong><a href="#fork-changes">Fork Changes</a></strong> for more information<br/>https://jf-vue-nao.vercel.app/</p>
+
+---
+
 <h1 align="center">Jellyfin Vue</h1>
 <h3 align="center">Part of the <a href="https://jellyfin.org">Jellyfin Project</a></h3>
 
@@ -207,3 +212,27 @@ You can help the Jellyfin project as a whole pay for server and API expenses thr
 If you want to strictly donate to the developers of Jellyfin Vue, check [our top contributors](https://github.com/jellyfin/jellyfin-vue/graphs/contributors) and sponsor whoever you want.
 
 The maintainers/leaders of the development of every Jellyfin project (including Jellyfin Vue) are listed [here](https://github.com/jellyfin/jellyfin-meta/blob/master/jellyfin-team.md#subproject-leaders).
+
+### Fork Changes
+
+The fork branch contains all the other branch implementation contained into one for deployment purpose. Might break something, so use it at your own risk.
+Some of the old stuff in here already been PR'd to upstream, so this will be less important later I guess.
+
+Now, here are the implemented stuff and also the planned stuff I want to do:
+
+**Changes**
+- A more strict markdown/HTML support ([`better-markdown-html-support`](https://github.com/noaione/jellyfin-vue/tree/better-markdown-html-support))
+  - Using the `unified`/`remark`/`rehype` framework instead of `marked`
+  - This will not allow every HTML tags to be used (See [`frontend/src/utils/render-markdown.ts`](https://github.com/noaione/jellyfin-vue/blob/nao/frontend/src/utils/render-markdown.ts#L11))
+  - Disallow image, link, definition (including reference) markdown format.
+  - The disallowed stuff will be kept in original format to notify that it's not supported
+- Split more JS files into chunks ([`chunk-build`](https://github.com/noaione/jellyfin-vue/tree/chunk-build))
+- Add video chapters to playback bar ([`video-chapters`](https://github.com/noaione/jellyfin-vue/tree/video-chapters))
+- Add support for my Playlist Generator plugin ([`plugin-playlistgen`](https://github.com/noaione/jellyfin-vue/tree/plugin-playlistgen))
+  - Plugin here: https://github.com/noaione/jellyfin-plugin-playlistgen/
+- Vercel Deployment helper/support ([`vercel-support`](https://github.com/noaione/jellyfin-vue/tree/vercel-support))
+  - Allow for a more easier deployment in Vercel
+
+**Planned**
+- Split or only allow selected localization to help reduce first-load JS more.
+- More native support.
