@@ -62,8 +62,8 @@ import IMdiPlaySpeed from 'virtual:icons/mdi/play-speed';
 import IMdiArrowExpandUp from 'virtual:icons/mdi/arrow-expand-up';
 import IMdiArrowExpandDown from 'virtual:icons/mdi/arrow-expand-down';
 import IMdiCloudSearch from 'virtual:icons/mdi/cloud-search-outline';
+import IMdiClipboardPlayMultiple from 'virtual:icons/mdi/clipboard-play-multiple-outline';
 import IMdiContentCopy from 'virtual:icons/mdi/content-copy';
-import IMdiCopyAll from 'virtual:icons/mdi/copy-all';
 import IMdiDelete from 'virtual:icons/mdi/delete';
 import IMdiDisc from 'virtual:icons/mdi/disc';
 import IMdiInformation from 'virtual:icons/mdi/information';
@@ -381,7 +381,7 @@ const copyDownloadURLAction = {
 };
 const copyPlaylistGeneratorPluginAction = {
   title: t('pluginCopyAsPlaylistURL'),
-  icon: IMdiCopyAll,
+  icon: IMdiClipboardPlayMultiple,
   action: async (): Promise<void> => {
     const clipboard = useClipboard();
 

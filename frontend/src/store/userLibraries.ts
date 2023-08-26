@@ -238,7 +238,7 @@ class UserLibrariesStore {
           fields: [
             ItemFields.PrimaryImageAspectRatio,
             ItemFields.MediaSources,
-            ItemFields.ProviderIds
+            ItemFields.ProviderIds,
             ItemFields.CanDelete,
             ItemFields.Taglines
           ],
